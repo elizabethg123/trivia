@@ -1,0 +1,33 @@
+/* Website formatting */
+* {
+  font-family: 'Rubik', sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+#myHeader {
+  background: #3282b8;
+}
+
+/* Footer */
+footer{
+  position: fixed;
+  margin-bottom: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  color: #3282b8;
+  background: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
