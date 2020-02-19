@@ -9,26 +9,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="shortcut icon" href="#" />
 </head>
 
 
 <body>
   <div class="page">
-    <h1 id="myHeader">Current Weather & Forecasts</h1>
-    <br/>
-    <form>
-      <label>Enter a U.S. city</label>
-      <input id="weatherInput" type="text"></input><br/>
-      <input id="weatherSubmit" type="submit" value="Submit"></input>
-    </form>
-    <div id="weatherResults"></div>
-      <br/>
-      <div id="forecastResults"></div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
-      <script text="type/javascript" src="/script.js"></script>
+    <h1 id="myHeader">Trivia</h1>
+      <form class="pure-form>" <fieldset>
+  <h3 id="result"></h3>  
+    <form id="selector">
+<input type="radio" name="choice" id="c1" value="Scripting"><p id="w1"></p>
+<input type="radio" name="choice" id="c2" value="Programming"><p id="w2"></p>
+<input type="radio" name="choice" id="c3" value="Application"><p id="w3"></p>
+<input type="radio" name="choice" id="c4" value="None of These"><p id="w4"></p>
+</form>
+<button id="submit" onclick="submitAnswer()">Submit Answer</button> 
+    <button id="woo" class="pure-button pure-button-primary">Woo!</button>
+    </fieldset>
+  </form>
+  
+
+  <script text="type/javascript" src="/script.js">
+  </script>
 </div>
   <footer>
-    <a href="https://github.com/BYU-CS-260-Winter-2020/lab-2-weather-app-elizabethg123"> My GitHub Repository</a>
+    <a href="https://github.com/elizabethg123/trivia"> My GitHub Repository</a>
   </footer>
 
 </body>

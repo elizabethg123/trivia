@@ -1,45 +1,92 @@
-document.getElementById("weatherSubmit").addEventListener("click", function(event) {
-  event.preventDefault();
-  const value = document.getElementById("weatherInput").value;
-  if (value === "")
-    return;
-  const url = "http://api.openweathermap.org/data/2.5/weather?q=" + value + ",US&units=imperial" + "&APPID=d2e245fe47034372fc25cb85a29f6e2a";
+var correctA = "";
+function onClick(e) {
+  e.preventDefault();
+  // setup URL
+  let url = "https://opentdb.com/api.php?amount=10&category=10";
+  // call API
   fetch(url)
     .then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      let results = "";
-      results += '<br><h2>Weather in ' + json.name + "</h2>";
-      for (let i=0; i < json.weather.length; i++) {
-        results += '<img src="http://openweathermap.org/img/w/' + json.weather[i].icon + '.png"/>';
-      }
-      results += '<h3>' + json.main.temp + " &deg;F</h3>"
-      results += "<p>"
-      for (let i=0; i < json.weather.length; i++) {
-        results += json.weather[i].description
-        if (i !== json.weather.length - 1)
-          results += ", "
-      }
-      results += "</p>";
-     results += "<br><p> Min: " + json.main.temp_min + " &deg;F<br>Max: " + json.main.temp_max + " &deg;F<br>Feels like: " + 
-     json.main.feels_like + " &deg;F<br>Pressure: " + json.main.pressure + " mb<br>Humidity: " + json.main.humidity + "%<br>Wind: " + json.wind.speed
-     + " mph, " + json.wind.deg + "&deg;</p>"; 
-     document.getElementById("weatherResults").innerHTML = results;
-    });
-  const url2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + value + ", US&units=imperial" + "&APPID=d2e245fe47034372fc25cb85a29f6e2a";
-  fetch(url2)
-    .then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      let forecast = "<hr><br><h2>5 Day/3 Hour Forecast</h2>";
-      for (let i=0; i < json.list.length; i++) {
-        if(i==0 || i%8==0){
-                forecast += "<h3>" + moment(json.list[i].dt_txt).format('MMMM Do YYYY') + "</h3><br/>";
+      // make sure the request was successful
+      if (response.status != 200) {
+        return {
+          text: "Error calling the Numbers API service: " + response.statusText
         }
-        forecast += "<h4>" + moment(json.list[i].dt_txt).format('h:mm a') + "</h4>";
-        forecast += "<p>Temperature: " + json.list[i].main.temp + " &deg;F</p>";
-        forecast += '<img src="http://openweathermap.org/img/w/' + json.list[i].weather[0].icon + '.png"/>'
       }
-      document.getElementById("forecastResults").innerHTML = forecast;
+      return response.json();
+    }).then(function(json) {
+      // update DOM with response
+      updateResult(json.results[0].question);
+
+      let answers = [];
+      for(let i = 0; i < json.results[0].incorrect_answers.length; i++){
+        console.log("wrong" + json.results[0].incorrect_answers[i]);
+        answers.push(json.results[0].incorrect_answers[i]);  
+      }
+      window.correctA = json.results[0].correct_answer;
+      answers.push(json.results[0].correct_answer);
+      shuffle(answers);
+      updateAnswers(answers);
+
+        
     });
-});
+}
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+function updateResult(info) {
+  document.getElementById('result').textContent = info;
+}
+
+function updateAnswers(info) {
+  console.log("test" + info[1]);
+  document.getElementById("c1").value = info[0];
+  document.getElementById("w1").textContent = info[0];
+
+  document.getElementById("c2").value = info[1];
+  document.getElementById("w2").textContent = info[1];
+
+  document.getElementById("c3").value = info[2];
+  document.getElementById("w3").textContent = info[2];
+
+  document.getElementById("c4").value = info[3];
+  document.getElementById("w4").textContent = info[3];
+}
+
+function submitAnswer(correct) {
+  var radios = document.getElementsByName("choice");
+  var i = 0, len = radios.length;
+  var checked = false;
+  var userAnswer;
+  
+  for( ; i < len; i++ ) {
+     if(radios[i].checked) {
+       checked = true;
+       userAnswer = radios[i].value;
+       console.log("user" + userAnswer);
+     }
+  }
+console.log("correct1" + correct); 
+  // if user click submit button without selecting any option, alert box should be say "please select choice answer".
+  if(!checked) {
+    alert("please select choice answer");
+    return;
+  }
+  // Correct answer
+  if(userAnswer === correct) {
+     alert("Answer is correct!");
+  }
+  // incorrect answer
+  else {
+     alert("Answer is wrong!");
+  }
+  
+}
+
+document.getElementById('woo').addEventListener('click', onClick);
+console.log("A" + correctA);
+document.getElementById('submit').addEventListener('click', submitAnswer(correctA));
+window.onload = onClick;
+
+
