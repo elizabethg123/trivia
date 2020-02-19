@@ -1,4 +1,6 @@
-var correctA = "";
+
+let score = 0;
+let correctA = "hi";
 function onClick(e) {
   e.preventDefault();
   // setup URL
@@ -22,12 +24,10 @@ function onClick(e) {
         console.log("wrong" + json.results[0].incorrect_answers[i]);
         answers.push(json.results[0].incorrect_answers[i]);  
       }
-      window.correctA = json.results[0].correct_answer;
+      correctA = json.results[0].correct_answer;
       answers.push(json.results[0].correct_answer);
       shuffle(answers);
-      updateAnswers(answers);
-
-        
+      updateAnswers(answers);        
     });
 }
 
@@ -40,7 +40,18 @@ function updateResult(info) {
 }
 
 function updateAnswers(info) {
-  console.log("test" + info[1]);
+  document.getElementById("c1").style.display = "block";
+  document.getElementById("c2").style.display = "block";
+  document.getElementById("c3").style.display = "block";
+  document.getElementById("c4").style.display = "block";
+  document.getElementById("w1").style.display = "block";
+  document.getElementById("w2").style.display = "block";
+  document.getElementById("w3").style.display = "block";
+  document.getElementById("w4").style.display = "block";
+  document.getElementById("woo").style.display = "none";
+  document.getElementById("submit").style.display = "block";
+  document.getElementById("answer").style.display = "none";
+  
   document.getElementById("c1").value = info[0];
   document.getElementById("w1").textContent = info[0];
 
@@ -73,20 +84,33 @@ console.log("correct1" + correct);
     alert("please select choice answer");
     return;
   }
-  // Correct answer
-  if(userAnswer === correct) {
-     alert("Answer is correct!");
-  }
   // incorrect answer
   else {
-     alert("Answer is wrong!");
+	document.getElementById("c1").style.display = "none";
+  document.getElementById("c2").style.display = "none";
+  document.getElementById("c3").style.display = "none";
+  document.getElementById("c4").style.display = "none";
+  document.getElementById("w1").style.display = "none";
+  document.getElementById("w2").style.display = "none";
+  document.getElementById("w3").style.display = "none";
+  document.getElementById("w4").style.display = "none";
+  document.getElementById("woo").style.display = "block";
+  document.getElementById("submit").style.display = "none";
+  document.getElementById("answer").style.display = "block";
+  if(userAnswer === correct) {
+	document.getElementById("answer").textContent = "You were correct! The correct answer was " + correct;	
   }
+  else{
+	document.getElementById("answer").textContent = "You were incorrect! The correct answer was " + correct;
+  }
+}
+
   
 }
 
-document.getElementById('woo').addEventListener('click', onClick);
-console.log("A" + correctA);
-document.getElementById('submit').addEventListener('click', submitAnswer(correctA));
 window.onload = onClick;
+document.getElementById('woo').addEventListener('click', onClick);
+document.getElementById('submit').addEventListener('click', function(){submitAnswer(correctA);});
+
 
 
