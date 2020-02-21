@@ -6,15 +6,38 @@ const choiceC = document.getElementById("C");
 const choiceD = document.getElementById("D");
 
 start.addEventListener("click",startTrivia);
+change.addEventListener("click",beginGame);
 next.addEventListener("click",renderQuestion);
 let correctA = "";
 let answersA = [];
 let questionA = "";
 let category = "10";
+
+function beginGame(){
+	document.getElementById("question").style.display = "none";
+	document.getElementById("A").style.display = "none";
+	document.getElementById("B").style.display = "none";
+	document.getElementById("C").style.display = "none";
+	document.getElementById("D").style.display = "none";
+	document.getElementById("change").style.display = "none";
+	document.getElementById("next").style.display = "none";
+
+	document.getElementById("categories").style.display = "flex";
+	document.getElementById("start").style.display = "flex";
+}
+
 function startTrivia(){
 	category = document.getElementById("categories").value;
-	document.getElementById("start").style.display = "none";
-	document.getElementById("categories").style.display = "none";
+	document.getElementById("question").style.display = "flex";
+        document.getElementById("A").style.display = "flex";
+        document.getElementById("B").style.display = "flex";
+        document.getElementById("C").style.display = "flex";
+        document.getElementById("D").style.display = "flex";
+        document.getElementById("change").style.display = "none";
+        document.getElementById("next").style.display = "none";
+
+        document.getElementById("categories").style.display = "none";
+        document.getElementById("start").style.display = "none";
 	renderQuestion();
 }
 
@@ -24,7 +47,6 @@ function renderQuestion(){
   // call API
   fetch(url)
     .then(function(response) {
-      // make sure the request was successful
       if (response.status != 200) {
         return {
           text: "Error calling the Numbers API service: " + response.statusText
@@ -43,12 +65,12 @@ function renderQuestion(){
       correctA = json.results[0].correct_answer;
       shuffle(answersA);
 	document.getElementById("next").style.display = "none";
+        document.getElementById("change").style.display = "none";
 	choiceA.style.background = "white";
 	choiceB.style.background = "white";
 	choiceC.style.background = "white";
 	choiceD.style.background = "white";
-       console.log(questionA);
-       console.log("answerA" + answersA[0]);
+  
        question.innerHTML = questionA;
        choiceA.innerHTML = answersA[0];
        choiceB.innerHTML = answersA[1];
@@ -64,13 +86,13 @@ function shuffle(array) {
 
 function checkAnswer(answer){
     if(document.getElementById(answer).innerHTML === correctA){
-        console.log("correct");
         document.getElementById(answer).style.background = "green";
-	document.getElementById("next").style.display = "block";
+	document.getElementById("change").style.display = "flex";
+	document.getElementById("next").style.display = "flex";
     }else{
         document.getElementById(answer).style.background = "red";
-        console.log("incorrect");
     }
 }
 
 
+window.onload = beginGame();

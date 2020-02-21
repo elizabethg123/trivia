@@ -4,8 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trivia</title>
-<link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/styles.css">
@@ -14,9 +13,9 @@
 
 
 <body>
-  <div class="page">
+<div class="page">
     <h1 id="myHeader">Trivia</h1>
-    <div id="start">Start Trivia</div>
+    <br/>
     <select id="categories">
   <option value="9">General Knowledge</option>
   <option value="10">Books</option>
@@ -29,21 +28,23 @@
   <option value="24">Politics</option>
 </select>
 
+  <div id="start" class="choice">Start Trivia</div>
     <div id="question"></div>
+<br/>
     <div id="choices">
         <div class="choice" id="A" onclick="checkAnswer('A')"></div>
         <div class="choice" id="B" onclick="checkAnswer('B')"></div>
         <div class="choice" id="C" onclick="checkAnswer('C')"></div>
 	<div class="choice" id="D" onclick="checkAnswer('D')"></div>
-    </div>  
+    </div>
+<br/>  
     <div id="next" class="choice" onclick="renderQuestion">Next</div>
-  <script text="type/javascript" src="/script.js">
-  </script>
-</div>
+ <div id="change" class="choice" onclick="startTrivia">Change Category</div> 
   <footer>
     <a href="https://github.com/elizabethg123/trivia"> My GitHub Repository</a>
   </footer>
-
+ <script text="type/javascript" src="/script.js"></script>
+<div/>
 </body>
 
 </html>

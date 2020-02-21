@@ -1,6 +1,6 @@
 /* Website formatting */
 * {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Righteous';
   color: black;
   margin: 0;
   padding: 0;
@@ -8,23 +8,23 @@
 }
 
 .page {
-  width: 90%;
   margin: auto;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   text-align: center;
 }
 
 #myHeader {
-  background: #3282b8;
+  background: #8B80F9;
 }
 
 /* Answers */
 .choice{
-    display: inline-block;
     text-align: center;
-    border : 1px solid grey;
+    border: 1px solid grey;
     margin: 5px;
-    padding : 5px;
-    width: 33%;
+    padding: 5px;
 }
 .choice:hover{
     border : 2px solid grey;
@@ -40,9 +40,10 @@ footer{
   left: 0px;
   right: 0px;
   height: 50px;
-  color: #3282b8;
+  color: #8B80F9;
   background: lightgray;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
