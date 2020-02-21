@@ -17,6 +17,21 @@
   background: #3282b8;
 }
 
+/* Answers */
+.choice{
+    display: inline-block;
+    text-align: center;
+    border : 1px solid grey;
+    margin: 5px;
+    padding : 5px;
+    width: 33%;
+}
+.choice:hover{
+    border : 2px solid grey;
+    font-weight: bold;
+}
+
+
 /* Footer */
 footer{
   position: fixed;
