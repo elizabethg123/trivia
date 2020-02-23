@@ -58,7 +58,6 @@ function renderQuestion(){
       answersA = [];
       for(let i = 0; i < json.results[0].incorrect_answers.length; i++){
         answersA.push(json.results[0].incorrect_answers[i]);
-        console.log(answersA);
       }
       answersA.push(json.results[0].correct_answer);      
       questionA = json.results[0].question;
@@ -83,9 +82,14 @@ function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
 }
 
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
 
 function checkAnswer(answer){
-    if(document.getElementById(answer).innerHTML === correctA){
+    if(document.getElementById(answer).innerHTML === decodeHtml(correctA)){
         document.getElementById(answer).style.background = "green";
 	document.getElementById("change").style.display = "flex";
 	document.getElementById("next").style.display = "flex";
